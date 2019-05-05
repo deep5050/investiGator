@@ -1,0 +1,5 @@
+[2019-05-05 20:03:58.189] [main] [info] update#setState idle
+[2019-05-05 20:03:59.344] [main] [info] [storage] migrating global storage from localStorage into SQLite
+[2019-05-05 20:03:59.345] [main] [info] [storage] migrated global storage
+[2019-05-05 20:04:28.192] [main] [info] update#setState checking for updates
+[2019-05-05 20:04:28.368] [main] [info] update#setState available for download

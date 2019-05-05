@@ -534,7 +534,8 @@
                     },
                     {
                         "id": "workbench.action.navigateToLastEditLocation",
-                        "label": "&&Last Edit Location"
+                        "label": "&&Last Edit Location",
+                        "enabled": false
                     },
                     {
                         "id": "vscode.menubar.separator"
@@ -1373,5 +1374,19 @@
             "file:///opt/lampp/htdocs/alliGator"
         ],
         "files2": []
+    },
+    "windowsState": {
+        "lastActiveWindow": {
+            "folder": "file:///opt/lampp/htdocs/alliGator",
+            "backupPath": "/opt/lampp/htdocs/alliGator/~/.vscode-root/Backups/a323ed90ba7c6629fb35345096716f7a",
+            "uiState": {
+                "mode": 0,
+                "x": 0,
+                "y": 34,
+                "width": 1366,
+                "height": 734
+            }
+        },
+        "openedWindows": []
     }
 }

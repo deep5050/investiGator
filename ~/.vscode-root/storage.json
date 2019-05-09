@@ -99,7 +99,8 @@
                     },
                     {
                         "id": "workbench.action.toggleAutoSave",
-                        "label": "A&&uto Save"
+                        "label": "A&&uto Save",
+                        "checked": true
                     },
                     {
                         "id": "",
@@ -534,8 +535,7 @@
                     },
                     {
                         "id": "workbench.action.navigateToLastEditLocation",
-                        "label": "&&Last Edit Location",
-                        "enabled": false
+                        "label": "&&Last Edit Location"
                     },
                     {
                         "id": "vscode.menubar.separator"
@@ -1380,11 +1380,11 @@
             "folder": "file:///opt/lampp/htdocs/alliGator",
             "backupPath": "/opt/lampp/htdocs/alliGator/~/.vscode-root/Backups/a323ed90ba7c6629fb35345096716f7a",
             "uiState": {
-                "mode": 0,
+                "mode": 1,
                 "x": 0,
-                "y": 34,
-                "width": 1366,
-                "height": 734
+                "y": 150,
+                "width": 1024,
+                "height": 542
             }
         },
         "openedWindows": []

@@ -64,18 +64,7 @@
                       <a href="admin_login.php">Are you an Admin?</a>
             
         </div>
-        <script>
 
-            document.getElementById("usertype").addEventListener('click',setuser);
-            function setuser()
-            {
-                
-                var checkbox =  document.getElementById("isadmin");
-                console.log(checkbox.nodeType);
-                if(checkbox.checked == true) checkbox.checked = false;
-                else checkbox.checked = true;
-            }
-        </script>
 
 </div>
                                  

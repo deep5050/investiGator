@@ -32,7 +32,11 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-
+    <style>
+    .nodisplay {
+        display: none;
+    }
+    </style>
 </head>
 
 <body class="animsition">
@@ -53,43 +57,7 @@
                     </div>
                 </div>
             </div>
-            <nav class="navbar-mobile">
-                <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="suspects.php">
-                                <i class="fas fa-tachometer-alt"></i>Suspects</a>
-                          <!--  <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="index.php">Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.php">Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.php">Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.php">Dashboard 4</a>
-                                </li>
-                            </ul> -->
-                        </li>
-                        <li>
-                            <a href="evidences.php">
-                                <i class="fas fa-chart-bar"></i>Evidence</a>
-                        </li>
-                        <li>
-                            <a href="casehistory.php">
-                                <i class="fas fa-table"></i>Case History</a>
-                        </li>
-                        <li>
-                            <a href="criminalrecords.php">
-                                <i class="far fa-check-square"></i>Criminal Records</a>
-                        </li>
-                        
-                    </ul>
-                </div>
-            </nav>
+
         </header>
         <!-- END HEADER MOBILE-->
 
@@ -111,16 +79,16 @@
                             <a href="evidences.php">
                                 <i class="fas fa-chart-bar"></i>Evidence</a>
                         </li>
-                        <li>
-                            <a href="casehistory.php">
-                                <i class="fas fa-table"></i>Case History</a>
-                        </li>
+
                         <li>
                             <a href="criminalrecords.php">
                                 <i class="far fa-check-square"></i>Criminal Records</a>
                         </li>
-                       
-                       
+
+                        <li>
+                            <a href="primesuspect.php">
+                                <i class="far fa-check-square"></i>Prime Suspect</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -134,15 +102,12 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
-                            </form>
+                            <input class="au-input au-input--xl nodisplay" type="text" name="search"
+                                placeholder="Search for datas &amp; reports..." />
+                            <h4>CASE ID</h4>
                             <div class="header-button">
                                 <div class="noti-wrap">
-                                    <div class="noti__item js-item-menu">
+                                    <div class="noti__item js-item-menu nodisplay">
                                         <i class="zmdi zmdi-comment-more"></i>
                                         <span class="quantity">1</span>
                                         <div class="mess-dropdown js-dropdown">
@@ -174,7 +139,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="noti__item js-item-menu">
+                                    <div class="noti__item js-item-menu nodisplay">
                                         <i class="zmdi zmdi-email"></i>
                                         <span class="quantity">1</span>
                                         <div class="email-dropdown js-dropdown">
@@ -213,7 +178,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="noti__item js-item-menu">
+                                    <div class="noti__item js-item-menu nodisplay">
                                         <i class="zmdi zmdi-notifications"></i>
                                         <span class="quantity">3</span>
                                         <div class="notifi-dropdown js-dropdown">
@@ -276,18 +241,7 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div>
+
                                             </div>
                                             <div class="account-dropdown__footer">
                                                 <a href="#">
@@ -310,115 +264,199 @@
 
 
 
-                            <div class="row">
-                                    <div class="col">
-                                      <section class="card" style="background: none;border: 0px;">
-                                        <div class="card-body text-secondary">
-                                                <button type="button" class="btn btn-primary btn-lg btn-block">Refresh</button>
-                                                
-                                        </div>
-                                      </section>
-                                    </div>
-                                    <div class="col">
-                                      <section class="card" style="background: none;border: 0px;">
-                                        <div class="card-body text-secondary"><button type="button" class="btn btn-success btn-lg btn-block">Add Entry</button>
-                                            
-                                      </section>
-                                    </div>
-                                    <div class="col">
-                                      <section class="card" style="background: none;border: 0px;">
-                                        <div class="card-body text-secondary"><button type="button" class="btn btn-danger btn-lg btn-block">Remove Entry</button></div></div>
-                                      </section>
-                                    </div>
-                                  </div>
+                        <div class="row">
+                            <div class="col">
+                                <section class="card" style="background: none;border: 0px;">
+                                    <div class="card-body text-secondary">
+                                        <button type="button" class="btn btn-primary btn-lg btn-block">Refresh</button>
 
-
-
-
-                                  <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
-                                                <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
-                                                    <div class="bg-overlay bg-overlay--blue"></div>
-                                                    <h3>
-                                                        <i class="zmdi zmdi-account-calendar"></i>26 April, 2018</h3>
-                                                    <button class="au-btn-plus">
-                                                        <i class="zmdi zmdi-plus"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="au-task js-list-load">
-                                                    <div class="au-task__title">
-                                                        <p>Tasks for John Doe</p>
-                                                    </div>
-                                                    <div class="au-task-list js-scrollbar3">
-                                                        <div class="au-task__item au-task__item--danger">
-                                                            <div class="au-task__item-inner">
-                                                                <h5 class="task">
-                                                                    <a href="#">Meeting about plan for Admin Template 2018</a>
-                                                                </h5>
-                                                                <span class="time">10:00 AM</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-task__item au-task__item--warning">
-                                                            <div class="au-task__item-inner">
-                                                                <h5 class="task">
-                                                                    <a href="#">Create new task for Dashboard</a>
-                                                                </h5>
-                                                                <span class="time">11:00 AM</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-task__item au-task__item--primary">
-                                                            <div class="au-task__item-inner">
-                                                                <h5 class="task">
-                                                                    <a href="#">Meeting about plan for Admin Template 2018</a>
-                                                                </h5>
-                                                                <span class="time">02:00 PM</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-task__item au-task__item--success">
-                                                            <div class="au-task__item-inner">
-                                                                <h5 class="task">
-                                                                    <a href="#">Create new task for Dashboard</a>
-                                                                </h5>
-                                                                <span class="time">03:30 PM</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-task__item au-task__item--danger js-load-item">
-                                                            <div class="au-task__item-inner">
-                                                                <h5 class="task">
-                                                                    <a href="#">Meeting about plan for Admin Template 2018</a>
-                                                                </h5>
-                                                                <span class="time">10:00 AM</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="au-task__item au-task__item--warning js-load-item">
-                                                            <div class="au-task__item-inner">
-                                                                <h5 class="task">
-                                                                    <a href="#">Create new task for Dashboard</a>
-                                                                </h5>
-                                                                <span class="time">11:00 AM</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="au-task__footer">
-                                                        <button class="au-btn au-btn-load js-load-btn">load more</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                                            </div>
-                                                        </div>
-                                                  
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
+                                </section>
+                            </div>
+                            <div class="col">
+                                <section class="card" style="background: none;border: 0px;">
+                                    <div class="card-body text-secondary"><button type="button"
+                                            class="btn btn-success btn-lg btn-block" data-toggle="modal"
+                                            data-target="#addmodal">Add Entry</button>
+
+                                </section>
+                            </div>
+
+                            </section>
+                        </div>
                     </div>
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- DATA TABLE-->
+                            <div class="table-responsive m-b-40">
+                                <table class="table table-borderless table-data3">
+                                    <thead>
+                                        <tr>
+                                            <th>Entry NO</th>
+                                            <th>Progress Info</th>
+                                            <th>date</th>
+                                            <th>status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2018-09-29 05:57</td>
+                                            <td>Mobile</td>
+                                            <td>iPhone X 64Gb Grey</td>
+                                            <td>Smartwatch 4.0 LTE Wifi</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-28 01:22</td>
+                                            <td>Mobile</td>
+                                            <td>Samsung S8 Black</td>
+                                            <td>Smartwatch 4.0 LTE Wifi</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-27 02:12</td>
+                                            <td>Game</td>
+                                            <td>Game Console Controller</td>
+                                            <td>Smartwatch 4.0 LTE Wifi</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-26 23:06</td>
+                                            <td>Mobile</td>
+                                            <td>iPhone X 256Gb Black</td>
+                                            <td>Smartwatch 4.0 LTE Wifi</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-25 19:03</td>
+                                            <td>Accessories</td>
+                                            <td>USB 3.0 Cable</td>
+                                            <td>Smartwatch 4.0 LTE Wifi</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-29 05:57</td>
+                                            <td>Accesories</td>
+                                            <td>Smartwatch 4.0 LTE Wifi</td>
+                                            <td>Smartwatch 4.0 LTE Wifi</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-24 19:10</td>
+                                            <td>Camera</td>
+                                            <td>Camera C430W 4k</td>
+                                            <td>Smartwatch 4.0 LTE Wifi</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2018-09-22 00:43</td>
+                                            <td>Computer</td>
+                                            <td>Macbook Pro Retina 2017</td>
+                                            <td>Smartwatch 4.0 LTE Wifi</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- END DATA TABLE-->
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
+
         </div>
-        <!-- END PAGE CONTAINER-->
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    </div>
+    <!-- END PAGE CONTAINER-->
+    <!-- modal large -->
+    <div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="largeModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">Add Evidence</div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="text-center title-2"></h3>
+                                        </div>
+                                        <hr>
+                                        <form action="./checkings/officer/add_evidences.php" method="post"
+                                            novalidate="novalidate">
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Case ID</label>
+                                                <input id="cc-pament" name="case-id" type="text" class="form-control"
+                                                    aria-required="true" aria-invalid="false">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Officer ID</label>
+                                                <input id="cc-pament" name="suspect-id" type="text" class="form-control"
+                                                    aria-required="true" aria-invalid="false">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Entry NO</label>
+                                                <input id="cc-pament" name="suspect-name" type="text"
+                                                    class="form-control" aria-required="true" aria-invalid="false">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Description</label>
+                                                <input id="cc-pament" name="address" type="text" class="form-control"
+                                                    aria-required="true" aria-invalid="false">
+                                            </div>
+                                           
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">strength</label>
+                                                <input id="cc-pament" name="relation" type="text" class="form-control"
+                                                    aria-required="true" aria-invalid="false">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Date</label>
+                                                <input id="cc-pament" name="motive" type="date" class="form-control"
+                                                    aria-required="true" aria-invalid="false">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">image</label>
+                                                <input id="cc-pament" name="case-id" type="file" class="form-control"
+                                                    aria-required="true" aria-invalid="false">
+                                            </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- end modal large -->
+
+
+
+
 
     </div>
 

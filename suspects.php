@@ -32,7 +32,9 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-
+<style>.nodisplay{
+ display:none;   
+}</style>
 </head>
 
 <body class="animsition">
@@ -42,7 +44,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="index.php">
                             <img src="images/icon/logo.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -53,43 +55,7 @@
                     </div>
                 </div>
             </div>
-            <nav class="navbar-mobile">
-                <div class="container-fluid">
-                    <ul class="navbar-mobile__list list-unstyled">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="suspects.html">
-                                <i class="fas fa-tachometer-alt"></i>Suspects</a>
-                          <!--  <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="index.html">Dashboard 1</a>
-                                </li>
-                                <li>
-                                    <a href="index2.html">Dashboard 2</a>
-                                </li>
-                                <li>
-                                    <a href="index3.html">Dashboard 3</a>
-                                </li>
-                                <li>
-                                    <a href="index4.html">Dashboard 4</a>
-                                </li>
-                            </ul> -->
-                        </li>
-                        <li>
-                            <a href="evidences.html">
-                                <i class="fas fa-chart-bar"></i>Evidence</a>
-                        </li>
-                        <li>
-                            <a href="casehistory.html">
-                                <i class="fas fa-table"></i>Case History</a>
-                        </li>
-                        <li>
-                            <a href="criminalrecords.html">
-                                <i class="far fa-check-square"></i>Criminal Records</a>
-                        </li>
-                        
-                    </ul>
-                </div>
-            </nav>
+           
         </header>
         <!-- END HEADER MOBILE-->
 
@@ -103,21 +69,22 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="suspects.html">
-                                <i class="fas fa-tachometer-alt"></i>Suspects</a>
-                        </li>
+                     
                         <li>
-                            <a href="evidences.html">
+                            <a href="evidences.php">
                                 <i class="fas fa-chart-bar"></i>Evidence</a>
                         </li>
                         <li>
-                            <a href="casehistory.html">
+                            <a href="casehistory.php">
                                 <i class="fas fa-table"></i>Case History</a>
                         </li>
                         <li>
-                            <a href="criminalrecords.html">
+                            <a href="criminalrecords.php">
                                 <i class="far fa-check-square"></i>Criminal Records</a>
+                        </li>
+                        <li>
+                            <a href="criminalrecords.php">
+                                <i class="far fa-check-square"></i>Prime Suspect</a>
                         </li>
                        
                        
@@ -134,15 +101,16 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
+ 
+                                <input class="au-input au-input--xl nodisplay" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                           
+                                   
                                 </button>
-                            </form>
-                            <div class="header-button">
+                            
+                            <h4>CASE ID</h4>
+                            <div class="header-button ">
                                 <div class="noti-wrap">
-                                    <div class="noti__item js-item-menu">
+                                    <div class="noti__item js-item-menu nodisplay">
                                         <i class="zmdi zmdi-comment-more"></i>
                                         <span class="quantity">1</span>
                                         <div class="mess-dropdown js-dropdown">
@@ -174,7 +142,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="noti__item js-item-menu">
+                                    <div class="noti__item js-item-menu nodisplay">
                                         <i class="zmdi zmdi-email"></i>
                                         <span class="quantity">1</span>
                                         <div class="email-dropdown js-dropdown">
@@ -190,7 +158,7 @@
                                                     <span>Cynthia Harvey, 3 min ago</span>
                                                 </div>
                                             </div>
-                                            <div class="email__item">
+                                            <div class="email__item nodisplay">
                                                 <div class="image img-cir img-40">
                                                     <img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey" />
                                                 </div>
@@ -213,7 +181,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="noti__item js-item-menu">
+                                    <div class="noti__item js-item-menu nodisplay">
                                         <i class="zmdi zmdi-notifications"></i>
                                         <span class="quantity">3</span>
                                         <div class="notifi-dropdown js-dropdown">
@@ -275,20 +243,7 @@
                                                     <span class="email">johndoe@example.com</span>
                                                 </div>
                                             </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div>
-                                            </div>
+                                          
                                             <div class="account-dropdown__footer">
                                                 <a href="#">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
@@ -307,7 +262,27 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
+                  
 
+
+
+<div class="row">
+        <div class="col">
+          <section class="card" style="background: none;border: 0px;">
+            <div class="card-body text-secondary">
+                    <button type="button" class="btn btn-primary btn-lg btn-block">Refresh</button>
+                    
+            </div>
+          </section>
+        </div>
+        <div class="col">
+          <section class="card" style="background: none;border: 0px;">
+            <div class="card-body text-secondary"><button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#addmodal">Add Entry</button>
+                
+          </section>
+        </div>
+        
+      </div>
 
 
                             <div class="row">
@@ -317,11 +292,11 @@
                                                 <table class="table table-borderless table-data3">
                                                     <thead>
                                                         <tr>
-                                                            <th>date</th>
-                                                            <th>type</th>
-                                                            <th>description</th>
-                                                            <th>status</th>
-                                                            <th>price</th>
+                                                            <th>suspect ID</th>
+                                                            <th>Name</th>
+                                                            <th>Address</th>
+                                                            <th>Remarks</th>
+                                                            
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -329,57 +304,50 @@
                                                             <td>2018-09-29 05:57</td>
                                                             <td>Mobile</td>
                                                             <td>iPhone X 64Gb Grey</td>
-                                                            <td class="process">Processed</td>
-                                                            <td>$999.00</td>
+                                                            <td>Smartwatch 4.0 LTE Wifi</td>
+                                                           
                                                         </tr>
                                                         <tr>
                                                             <td>2018-09-28 01:22</td>
                                                             <td>Mobile</td>
                                                             <td>Samsung S8 Black</td>
-                                                            <td class="process">Processed</td>
-                                                            <td>$756.00</td>
+                                                            <td>Smartwatch 4.0 LTE Wifi</td>
                                                         </tr>
                                                         <tr>
                                                             <td>2018-09-27 02:12</td>
                                                             <td>Game</td>
                                                             <td>Game Console Controller</td>
-                                                            <td class="denied">Denied</td>
-                                                            <td>$22.00</td>
+                                                            <td>Smartwatch 4.0 LTE Wifi</td>
                                                         </tr>
                                                         <tr>
                                                             <td>2018-09-26 23:06</td>
                                                             <td>Mobile</td>
                                                             <td>iPhone X 256Gb Black</td>
-                                                            <td class="denied">Denied</td>
-                                                            <td>$1199.00</td>
+                                                            <td>Smartwatch 4.0 LTE Wifi</td>
                                                         </tr>
                                                         <tr>
                                                             <td>2018-09-25 19:03</td>
                                                             <td>Accessories</td>
                                                             <td>USB 3.0 Cable</td>
-                                                            <td class="process">Processed</td>
-                                                            <td>$10.00</td>
+                                                            <td>Smartwatch 4.0 LTE Wifi</td>
                                                         </tr>
                                                         <tr>
                                                             <td>2018-09-29 05:57</td>
                                                             <td>Accesories</td>
                                                             <td>Smartwatch 4.0 LTE Wifi</td>
-                                                            <td class="denied">Denied</td>
-                                                            <td>$199.00</td>
+                                                            <td>Smartwatch 4.0 LTE Wifi</td>
                                                         </tr>
                                                         <tr>
                                                             <td>2018-09-24 19:10</td>
                                                             <td>Camera</td>
                                                             <td>Camera C430W 4k</td>
-                                                            <td class="process">Processed</td>
-                                                            <td>$699.00</td>
+                                                            <td>Smartwatch 4.0 LTE Wifi</td>
                                                         </tr>
                                                         <tr>
                                                             <td>2018-09-22 00:43</td>
                                                             <td>Computer</td>
                                                             <td>Macbook Pro Retina 2017</td>
-                                                            <td class="process">Processed</td>
-                                                            <td>$10.00</td>
+                                                            <td>Smartwatch 4.0 LTE Wifi</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -393,7 +361,80 @@
             </div>
         </div>
         <!-- END PAGE CONTAINER-->
-
+<!-- modal large -->
+<div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="largeModalLabel"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="card">
+                                                        <div class="card-header">Add Suspects</div>
+                                                        <div class="card-body">
+                                                            <div class="card-title">
+                                                                <h3 class="text-center title-2"></h3>
+                                                            </div>
+                                                            <hr>
+                                                            <form action="./checkings/officer/add_suspects.php" method="post" novalidate="novalidate">
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">Case ID</label>
+                                                                    <input id="cc-pament" name="case-id" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">suspect ID</label>
+                                                                    <input id="cc-pament" name="suspect-id" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">Name</label>
+                                                                    <input id="cc-pament" name="suspect-name" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">address</label>
+                                                                    <input id="cc-pament" name="address" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">Pin</label>
+                                                                    <input id="cc-pament" name="pin" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">Relation</label>
+                                                                    <input id="cc-pament" name="relation" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">motive</label>
+                                                                    <input id="cc-pament" name="motive" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">contact</label>
+                                                                    <input id="cc-pament" name="contact" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">image</label>
+                                                                    <input id="cc-pament" name="case-id" type="file" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                              
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
     </div>
 
     <!-- Jquery JS-->

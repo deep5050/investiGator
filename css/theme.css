@@ -651,6 +651,13 @@ section {
     display: -ms-flexbox;
     display: flex;
 }
+.selected{
+    color: pink;
+    text-decoration: #ee0979;
+}
+.nodisplay{
+    display:none;
+}
 
 @media (max-width: 991px) {
     .form-header {

@@ -179,7 +179,7 @@ else
                                 <div class="account-wrap" style="float:right;">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                            <img src="Officers/officer2.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#"><?php echo $officer_name ?> </a>
@@ -188,7 +188,7 @@ else
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                        <img src="Officers/officer2.jpg" alt="John Doe" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -230,7 +230,7 @@ else
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="mx-auto d-block">
-                                            <img class="rounded-circle mx-auto d-block" src="images/icon/avatar-01.jpg"
+                                            <img class="rounded-circle mx-auto d-block" src="Officers/officer2.jpg"
                                                 alt="Card image cap">
                                             <h5 class="text-sm-center mt-2 mb-1"> <?php echo $officer_name ?> </h5>
                                             <div class="location text-sm-center">
@@ -289,7 +289,7 @@ else
 
                         //$sql = "SELECT Case_Id,Title,Summary,Date_Of_FIR FROM case WHERE Case_Id = (SELECT Case_Id from assigns WHERE Officer_Id ='$officer_id' )";
                         $sql="SELECT  Case_Id,Title,Summary,Date_Of_FIR FROM `case` WHERE Case_Id = (SELECT Case_Id FROM assigns WHERE Officer_Id ='$officer_id')";
-                        echo $sql;
+                        //echo $sql;
                         if(isset($_GET['toogle']))
                         {
                         if($_GET['toogle']=='1')

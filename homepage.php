@@ -1,3 +1,14 @@
+<?php
+session_start();
+if(isset($_SESSION['user_id']))
+{
+  header('Location: officer_dashboard.php');
+  exit();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +58,7 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
+                            <form action="./checkings/officer/validate_officer.php" method="post">
                                 <div class="form-group">
 
 <div class="container-fluid">
@@ -70,11 +81,11 @@
                                  
                                     
 <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password" required>
                                 </div>
                                 <div class="login-checkbox">
                                 
@@ -82,9 +93,36 @@
                                         <a href="forget-pass.php">Forgotten Password?</a>
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit" name="submit">sign in</button>
                            
                             </form>
+
+
+                        <?php
+
+                                    if(isset($_GET['error']))
+                                    {
+                                        $code = $_GET['error'];
+                                        if($code == '1')
+                                        {
+                                            echo '<div class="alert alert-danger" role="alert">
+                                            Invalid Email or Password
+                                          </div>';
+                                        }
+                                        else if($code=='2')
+                                        {
+                                            
+                                            echo '<div class="alert alert-danger" role="alert">
+                                            Error in connecting to the database
+                                          </div>';
+                                        }
+                                     
+                                    }
+                                
+                                            ?>
+
+
+
 
                         </div>
                     </div>

@@ -1,3 +1,5 @@
 <?php
-// TODO  a lot of things to do here
+session_start();
+session_destroy();
+header('Location: ../homepage.php');
 ?>

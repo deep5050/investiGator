@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+if(isset($_SESSION['officer_id']))
+{
+    $officer_id = $_SESSION['officer_id'];
+    $officer_name = $_SESSION['officer_name'];
+    //$officer_address=$_SESSION['officer_address'];
+    $officer_desig=$_SESSION['officer_desig'];
+
+}
+else
+{
+    header('Location: ./homepage.php');
+    exit();
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,7 +182,7 @@
                                             <img src="images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#"><?php echo $officer_name ?> </a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -173,15 +193,15 @@
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="#"><?php echo $officer_name ?> </a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email"><?php echo $_SESSION['officer_id']?> </span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
 
                                                 <div class="account-dropdown__footer">
-                                                    <a href="logout.php">
+                                                    <a href="./checkings/logout.php">
                                                         <i class="zmdi zmdi-power"></i>Logout</a>
                                                 </div>
                                             </div>
@@ -212,9 +232,9 @@
                                         <div class="mx-auto d-block">
                                             <img class="rounded-circle mx-auto d-block" src="images/icon/avatar-01.jpg"
                                                 alt="Card image cap">
-                                            <h5 class="text-sm-center mt-2 mb-1">Steven Lee</h5>
+                                            <h5 class="text-sm-center mt-2 mb-1"> <?php echo $officer_name ?> </h5>
                                             <div class="location text-sm-center">
-                                                <i class="fa fa-map-marker"></i> California, United States</div>
+                                                <i class=""></i><?php echo $officer_desig ?> </div>
                                         </div>
 
 
@@ -224,17 +244,18 @@
                             </div>
                         </div>
                         <div class="row">
-                          
+                         
                             <div class="col">
                                 <section class="card" style="background: none;border: 0px;">
-                                    <div class="card-body text-secondary"><button type="button"
+                                    <div class="card-body text-secondary"><button type="button" id="refresh"
                                             class="btn btn-success btn-lg btn-block">Refresh</button>
 
                                 </section>
+                               
                             </div>
                             <div class="col">
                                 <section class="card" style="background: none;border: 0px;">
-                                    <div class="card-body text-secondary"><button type="button"
+                                    <div class="card-body text-secondary"><button type="button" id="toggle"
                                             class="btn btn-danger btn-lg btn-block">Sort By Date</button></div>
                             </div>
                             </section>
@@ -244,6 +265,13 @@
                     <div class="row">
 
                         <div class="col-md-12">
+
+
+
+                        <?php
+                                        require_once('./checkings/dbcon.php');
+
+                        ?>
                             <!-- DATA TABLE-->
                             <div class="table-responsive m-b-40">
                                 <table class="table table-borderless table-data3">
@@ -251,42 +279,53 @@
                                         <tr>
                                             <th>Case ID</th>
                                             <th>Title</th>
-                                            <th>date</th>
-                                            <th>status</th>
+                                            <th>summary</th>
+                                            <th>date of FIR</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            
-                                            <td>   <a href="./suspects.php?case-id=1">1</a>  </td>
-                                            <td>iPhone X 64Gb Grey</td>
-                                            <td>2018-09-29 05:57</td>
-                                            <td class="process">open</td>
-                                           
-                                        </tr>
-                                        <tr>
-                                            
-                                            <td>2</td>
-                                            <td>Samsung S8 Black</td>
-                                            <td>2018-09-28 01:22</td>
-                                            <td class="process">open</td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Game Console Controller</td>
-                                            <td>2018-09-27 02:12</td>
-                                            <td class="denied">closed</td>
-                                           
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>iPhone X 256Gb Black</td>
-                                            <td>2018-09-26 23:06</td>
-                                            <td class="denied">closed</td>
-                                         
-                                        </tr>
-                                     
+
+                                        <?php
+
+                        //$sql = "SELECT Case_Id,Title,Summary,Date_Of_FIR FROM case WHERE Case_Id = (SELECT Case_Id from assigns WHERE Officer_Id ='$officer_id' )";
+                        $sql="SELECT  Case_Id,Title,Summary,Date_Of_FIR FROM `case` WHERE Case_Id = (SELECT Case_Id FROM assigns WHERE Officer_Id ='$officer_id')";
+                        echo $sql;
+                        if(isset($_GET['toogle']))
+                        {
+                        if($_GET['toogle']=='1')
+                        {
+                            $sql="SELECT  Case_Id,Title,Summary,Date_Of_FIR FROM `case` WHERE Case_Id = (SELECT Case_Id FROM assigns WHERE Officer_Id ='$officer_id') order by Date_Of_FIR";
+                        }
+                        }
+
+                        $result = mysqli_query($conn, $sql);
+
+                        if(mysqli_num_rows($result)>0)
+                        {
+                        
+                            while($row = mysqli_fetch_assoc($result)) 
+                            {
+                            //    $anchor="<a href=./suspects.php?case=".$row['case']
+                              echo '<tr>';
+                              echo '<td><a href="./suspects.php?case='.$row['Case_Id'].'">'.$row['Case_Id'].'</a></td>';
+                              echo '<td>'.$row['Title'].'</td>';
+                              echo '<td>'.$row['Summary'].'</td>';
+                              echo '<td>'.$row['Date_Of_FIR'].'</td>';
+                              echo '</tr>';
+                             }
+                        }
+                        else
+                        {
+                            // echo '<div class="alert alert-warning" role="alert">
+                            //                 NO assgined Cases yet!!
+                            //               </div>';
+
+                            
+                        }
+                        mysqli_close($conn);
+                                ?>
+
+
                                     </tbody>
                                 </table>
                             </div>
@@ -324,7 +363,21 @@
     <!-- Main JS-->
     <script src="js/main.js"></script>
 
+    <script>
+
+                        document.getElementById('refresh').addEventListener('click',function(e){
+                            document.location='officer_dashboard.php';
+                        })
+                        document.getElementById('toggle').addEventListener('click',function(e){
+                            document.location='officer_dashboard.php?toogle=1';
+                        })
+
+
+</script>
+
 </body>
 
 </html>
 <!-- end document-->
+
+

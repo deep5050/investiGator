@@ -1,3 +1,25 @@
+<?php
+session_start();
+
+if(isset($_SESSION['admin_id']))
+{
+    $officer_id = $_SESSION['admin_id'];
+    // $officer_name = $_SESSION['officer_name'];
+    // //$officer_address=$_SESSION['officer_address'];
+    // $officer_desig=$_SESSION['officer_desig'];
+
+}
+else
+{
+    header('Location: ./homepage.php');
+    exit();
+}
+
+require_once('./checkings/dbcon.php');
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,7 +83,7 @@
                                 <i class="fas fa-tachometer-alt"></i>Add Case</a>
                         </li>
                         <li>
-                            <a href="./checkings/admin/add_officer.php">
+                            <a href="./admin_addofficer.php">
                                 <i class="fas fa-chart-bar"></i>Add Officer</a>
                         </li>
                         <li>
@@ -93,12 +115,12 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="has-sub">
+                        <!-- <li class="has-sub">
                             <a class="js-arrow" href="./checkings/admin/add_case.php">
                                 <i class="fas fa-tachometer-alt"></i>Add Case</a>
-                        </li>
+                        </li> -->
                         <li>
-                            <a href="./checkings/admin/add_officer.php">
+                            <a href="./admin_addofficer.php">
                                 <i class="fas fa-chart-bar"></i>Add Officer</a>
                         </li>
                         <li>
@@ -109,10 +131,10 @@
                             <a href="./checkings/admin/add_result.php">
                                 <i class="far fa-check-square"></i>Add Result</a>
                         </li>
-                        <li>
-                            <a href="admin_view_case_history.php">
+                        <!-- <li>
+                            <a href="admin_casehistory.php">
                                 <i class="far fa-check-square"></i>View Case History</a>
-                        </li>
+                        </li> -->
 
 
 
@@ -128,13 +150,25 @@
             <header class="header-desktop">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
+
+
+
+                
+
+
+
+
+
+
+
+
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search"
+                                <!-- <input class="au-input au-input--xl" type="text" name="search"
                                     placeholder="Search for datas &amp; reports..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
-                                </button>
+                                </button> -->
                             </form>
                             <div class="header-button">
                                 <div class="noti-wrap">
@@ -255,7 +289,7 @@
                                             <img src="images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#"><?php echo $_SESSION['admin_id']?></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -265,10 +299,8 @@
                                                     </a>
                                                 </div>
                                                 <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">john doe</a>
-                                                    </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                  
+                                                    <span class="email"><?php echo $_SESSION['admin_id']?></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -305,10 +337,54 @@
 
                     <div class="section__content section__content--p30">
                             <div class="container-fluid">
+                            <?php
+
+if(isset($_GET['err']))
+{
+    if($_GET['err']=='1')
+    {
+        echo '<div class="alert alert-danger" role="alert">
+        Something Went Wrong !!
+      </div>';
+    }
+    else if($_GET['err']=='0')
+    {
+        echo '<div class="alert alert-success" role="alert">
+        Successfully Inserted!!
+      </div>';
+    }
+}
+?>
+
+
+                            <div class="row">
+                            <div class="col">
+                                <section class="card" style="background: none;border: 0px;">
+                                    <div class="card-body text-secondary">
+                                        <button type="button" class="btn btn-primary btn-lg btn-block" id="refresh">Refresh</button>
+
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="col">
+                                <section class="card" style="background: none;border: 0px;">
+                                    <div class="card-body text-secondary"><button type="button"
+                                            class="btn btn-success btn-lg btn-block" data-toggle="modal"
+                                            data-target="#addmodal">Add Entry</button>
+
+                                </section>
+                            </div>
+
+                        </div>
+
+
+
+
+
                                 <div class="row">
 
-                    <div class="col-md-12">
-                            <div class="card">
+                                 <div class="col-md-12">
+                            <!-- <div class="card">
                                 <div class="card-body">
                                     <div class="mx-auto d-block">
                                         <img class="rounded-circle mx-auto d-block" src="images/icon/avatar-01.jpg" alt="Card image cap">
@@ -320,9 +396,69 @@
                               
                                 </div>
                                
-                            </div>
+                            </div> -->
                         </div>
                                 </div>
+
+
+
+                                <div class="row">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                                <div class="table-responsive m-b-40">
+                                <table class="table table-borderless table-data3">
+                                    <thead>
+                                        <tr>
+                                            <th>Case ID</th>
+                                            <th>Title</th>
+                                            <th>summary</th>
+                                            <th>date of FIR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php
+
+                       
+                            $sql="SELECT  Case_Id,Title,Summary,Date_Of_FIR FROM `case` WHERE Admin_Id='".$_SESSION['admin_id']."'";
+                                              //  echo $sql;
+
+
+                        $result = mysqli_query($conn, $sql);
+
+                        if(mysqli_num_rows($result)>0)
+                        {
+                        
+                            while($row = mysqli_fetch_assoc($result)) 
+                            {
+                               // echo "found";
+                            //    $anchor="<a href=./suspects.php?case=".$row['case']
+                              echo '<tr>';
+                              echo '<td><a href="./admin_casehistory.php?case='.$row['Case_Id'].'">'.$row['Case_Id'].'</a></td>';
+                              echo '<td>'.$row['Title'].'</td>';
+                              echo '<td>'.$row['Summary'].'</td>';
+                              echo '<td>'.$row['Date_Of_FIR'].'</td>';
+                              echo '</tr>';
+                             }
+                        }
+                        else
+                        {
+                            // echo '<div class="alert alert-warning" role="alert">
+                            //                 NO assgined Cases yet!!
+                            //               </div>';
+
+                            
+                        }
+                        mysqli_close($conn);
+                                ?>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                                <!-- END DATA TABLE-->
+                            </div>
+
                             </div>
             </div>
         </div>
@@ -335,6 +471,73 @@
     <!-- END PAGE CONTAINER-->
 
     </div>
+
+
+
+
+
+    
+    <!-- modal large -->
+    <div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="largeModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">Add Case</div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="text-center title-2"></h3>
+                                        </div>
+                                        <hr>
+                                        <form action="./checkings/admin/add_case.php"  method="post" novalidate="novalidate" enctype="multipart/form-data">
+                                           
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Case Title</label>
+                                                <input id="cc-pament" name="title" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Summary</label>
+                                                <input id="cc-pament" name="summary" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
+                                            </div>
+                      
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Date Of FIR</label>
+                                                <input id="cc-pament" name="date" type="text" class="form-control" aria-required="true" aria-invalid="false" required placeholder="yyyy-mm-dd">
+                                            </div>
+                            
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- end modal large -->
+
+
+
+
+
+
 
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
@@ -359,7 +562,14 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+    <?php
 
+echo "<script>
+document.getElementById('refresh').addEventListener('click',function(e){
+document.location='admin_dashboard.php';
+})
+</script>"
+?>
 </body>
 
 </html>

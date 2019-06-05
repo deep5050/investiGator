@@ -1,3 +1,25 @@
+
+<?php
+    session_start();
+    if(isset($_SESSION['officer_id']) && isset($_GET['case']))
+    {
+        $case_id = $_GET['case'];
+        $_SESSION['case_id']=$case_id;
+    }else if(!isset($_GET['case']))
+    {
+        header('Location: officer_dashboard.php');
+        exit();
+    }else
+    {
+        headr('Location: homepage.php');
+        exit();
+    }
+
+    require_once('./checkings/dbcon.php');
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +84,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
+            <a href="./officer_dashboard.php">
                     <img src="images/icon/logo.png" alt="Cool Admin" />
                 </a>
             </div>
@@ -107,7 +129,7 @@
                                    
                                 </button>
                             
-                            <h4>CASE ID</h4>
+                            <?php echo '<h4>CASE ID: '.$case_id.'</h4>'?>
                             <div class="header-button ">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu nodisplay">
@@ -238,14 +260,14 @@
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="#"><?php echo $_SESSION['officer_name'] ?></a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email"><?php echo $_SESSION['officer_id'] ?></span>
                                                 </div>
                                             </div>
                                           
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
+                                                <a href="./checkings/logout.php">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
@@ -263,21 +285,38 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                   
+                    <?php
 
+if(isset($_GET['err']))
+{
+    if($_GET['err']=='1')
+    {
+        echo '<div class="alert alert-danger" role="alert">
+        Something Went Wrong !!
+      </div>';
+    }
+    else if($_GET['err']=='0')
+    {
+        echo '<div class="alert alert-success" role="alert">
+        Successfully Inserted!!
+      </div>';
+    }
+}
+?>
 
 
 <div class="row">
         <div class="col">
           <section class="card" style="background: none;border: 0px;">
             <div class="card-body text-secondary">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Refresh</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="refresh">Refresh</button>
                     
             </div>
           </section>
         </div>
         <div class="col">
           <section class="card" style="background: none;border: 0px;">
-            <div class="card-body text-secondary"><button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#addmodal">Add Entry</button>
+            <div class="card-body text-secondary"><button type="button" id="" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#addmodal">Add Entry</button>
                 
           </section>
         </div>
@@ -294,61 +333,62 @@
                                                         <tr>
                                                             <th>suspect ID</th>
                                                             <th>Name</th>
-                                                            <th>Address</th>
-                                                            <th>Remarks</th>
+                                                            <th>sex</th>
+                                                            <th>contact</th>
+                                                            <th>age</th>
+                                                            <th>address</th>
+                                                            <th>relation</th>
+                                                            <th>motive</th>
+                                                            <th>rank</th>
                                                             
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>2018-09-29 05:57</td>
-                                                            <td>Mobile</td>
-                                                            <td>iPhone X 64Gb Grey</td>
-                                                            <td>Smartwatch 4.0 LTE Wifi</td>
-                                                           
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2018-09-28 01:22</td>
-                                                            <td>Mobile</td>
-                                                            <td>Samsung S8 Black</td>
-                                                            <td>Smartwatch 4.0 LTE Wifi</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2018-09-27 02:12</td>
-                                                            <td>Game</td>
-                                                            <td>Game Console Controller</td>
-                                                            <td>Smartwatch 4.0 LTE Wifi</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2018-09-26 23:06</td>
-                                                            <td>Mobile</td>
-                                                            <td>iPhone X 256Gb Black</td>
-                                                            <td>Smartwatch 4.0 LTE Wifi</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2018-09-25 19:03</td>
-                                                            <td>Accessories</td>
-                                                            <td>USB 3.0 Cable</td>
-                                                            <td>Smartwatch 4.0 LTE Wifi</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2018-09-29 05:57</td>
-                                                            <td>Accesories</td>
-                                                            <td>Smartwatch 4.0 LTE Wifi</td>
-                                                            <td>Smartwatch 4.0 LTE Wifi</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2018-09-24 19:10</td>
-                                                            <td>Camera</td>
-                                                            <td>Camera C430W 4k</td>
-                                                            <td>Smartwatch 4.0 LTE Wifi</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2018-09-22 00:43</td>
-                                                            <td>Computer</td>
-                                                            <td>Macbook Pro Retina 2017</td>
-                                                            <td>Smartwatch 4.0 LTE Wifi</td>
-                                                        </tr>
+                                                       
+                                        <?php
+
+//$sql = "SELECT Case_Id,Title,Summary,Date_Of_FIR FROM case WHERE Case_Id = (SELECT Case_Id from assigns WHERE Officer_Id ='$officer_id' )";
+$sql="SELECT  * FROM `suspects` WHERE Case_Id = $case_id";
+//echo $sql;
+if(isset($_GET['toogle']))
+{
+if($_GET['toogle']=='1')
+{
+    $sql="SELECT  Sus_Id,Sus_Name,Sex,Contact,Age,'Address',Relation,Motive,'Rank' FROM `suspects` WHERE Case_Id = $case_id  order by Sus_Id";
+}
+}
+
+$result = mysqli_query($conn, $sql);
+
+if(mysqli_num_rows($result)>0)
+{
+
+    while($row = mysqli_fetch_assoc($result)) 
+    {
+    //    $anchor="<a href=./suspects.php?case=".$row['case']
+      echo '<tr>';
+      echo '<td>'.$row['Sus_Id'].'</td>';
+      echo '<td>'.$row['Sus_Name'].'</td>';
+      echo '<td>'.$row['Sex'].'</td>';
+      echo '<td>'.$row['Contact'].'</td>';
+      echo '<td>'.$row['Age'].'</td>';
+      echo '<td>'.$row['Address'].'</td>';
+      echo '<td>'.$row['Relation'].'</td>';
+      echo '<td>'.$row['Motive'].'</td>';
+      echo '<td>'.$row['Rank'].'</td>';
+      echo '</tr>';
+     }
+}
+else
+{
+    // echo '<div class="alert alert-warning" role="alert">
+    //                 NO assgined Cases yet!!
+    //               </div>';
+
+    
+}
+mysqli_close($conn);
+        ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -382,22 +422,34 @@
                                                                 <h3 class="text-center title-2"></h3>
                                                             </div>
                                                             <hr>
-                                                            <form action="./checkings/officer/add_suspects.php" method="post" novalidate="novalidate">
+                                                            <form action="./checkings/officer/add_suspects.php" method="post" novalidate="novalidate" enctype="multipart/form-data">
                                                                 <div class="form-group">
                                                                     <label for="cc-payment" class="control-label mb-1">Case ID</label>
-                                                                    <input id="cc-pament" name="case-id" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                   <?php echo '<input id="cc-pament" name="case_id" type="text" class="form-control" aria-required="true" aria-invalid="false" value='.$case_id.'>' ?>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="cc-payment" class="control-label mb-1">suspect ID</label>
-                                                                    <input id="cc-pament" name="suspect-id" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                    <input id="cc-pament" name="suspect_id" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="cc-payment" class="control-label mb-1">Name</label>
-                                                                    <input id="cc-pament" name="suspect-name" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                    <input id="cc-pament" name="name" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="cc-payment" class="control-label mb-1">address</label>
                                                                     <input id="cc-pament" name="address" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">contact</label>
+                                                                    <input id="cc-pament" name="contact" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">Age</label>
+                                                                    <input id="cc-pament" name="age" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">Sex</label>
+                                                                    <input id="cc-pament" name="sex" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="cc-payment" class="control-label mb-1">Pin</label>
@@ -412,15 +464,18 @@
                                                                     <input id="cc-pament" name="motive" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="cc-payment" class="control-label mb-1">contact</label>
-                                                                    <input id="cc-pament" name="contact" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                    <label for="cc-payment" class="control-label mb-1">Rank</label>
+                                                                    <input id="cc-pament" name="rank" type="text" class="form-control" aria-required="true" aria-invalid="false">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="cc-payment" class="control-label mb-1">image</label>
-                                                                    <input id="cc-pament" name="case-id" type="file" class="form-control" aria-required="true" aria-invalid="false">
+                                                                    <input id="cc-pament" name="image" type="file" class="form-control" aria-required="true" aria-invalid="false">
                                                                 </div>
-                                                              
-                                                           
+                                                                <div class="form-group">
+                                                                    <label for="cc-payment" class="control-label mb-1">remark</label>
+                                                                    <input id="cc-pament" name="remark" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                                </div>
+                                                                                                      
                                                         </div>
                                                     </div>
                                                 </div>
@@ -429,7 +484,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                             </div>
                             </form>
                         </div>
@@ -460,8 +515,17 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+    <?php
+
+    echo "<script>
+document.getElementById('refresh').addEventListener('click',function(e){
+    document.location='suspects.php?case=$case_id';
+})
+</script>"
+?>
 
 </body>
 
 </html>
 <!-- end document-->
+

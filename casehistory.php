@@ -1,3 +1,22 @@
+<?php
+
+    session_start();
+    if(!isset($_SESSION['officer_id'])&& !isset($_SESSION['case_id']))
+    {
+        header('Location: ./officer_dashboard.php');
+        exit();
+    }
+    $case_id=$_SESSION['case_id'];
+    $officer_id=$_SESSION['officer_id'];
+    
+    require_once('./checkings/dbcon.php');
+ 
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,7 +83,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
+                <a href="./officer_dashboard.php">
                     <img src="images/icon/logo.png" alt="Cool Admin" />
                 </a>
             </div>
@@ -104,7 +123,7 @@
                         <div class="header-wrap">
                             <input class="au-input au-input--xl nodisplay" type="text" name="search"
                                 placeholder="Search for datas &amp; reports..." />
-                            <h4>CASE ID</h4>
+                                <?php echo '<h4>CASE ID: '.$case_id.'</h4>'?>
                             <div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu nodisplay">
@@ -224,7 +243,7 @@
                                             <img src="images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#"><?php echo $_SESSION['officer_name']?></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -235,16 +254,16 @@
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="#"><?php echo $_SESSION['officer_name']; ?></a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email"><?php echo $_SESSION['officer_id'] ?></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
 
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
+                                                <a href="./checkings/logout.php">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
@@ -262,13 +281,30 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
 
+                    <?php
 
+if(isset($_GET['err']))
+{
+    if($_GET['err']=='1')
+    {
+        echo '<div class="alert alert-danger" role="alert">
+        Something Went Wrong !!
+      </div>';
+    }
+    else if($_GET['err']=='0')
+    {
+        echo '<div class="alert alert-success" role="alert">
+        Successfully Inserted!!
+      </div>';
+    }
+}
+?>
 
                         <div class="row">
                             <div class="col">
                                 <section class="card" style="background: none;border: 0px;">
                                     <div class="card-body text-secondary">
-                                        <button type="button" class="btn btn-primary btn-lg btn-block">Refresh</button>
+                                        <button type="button" class="btn btn-primary btn-lg btn-block" id="refresh">Refresh</button>
 
                                     </div>
                                 </section>
@@ -297,14 +333,61 @@
                                     <thead>
                                         <tr>
                                             <th>Entry NO</th>
+                                            <th>Entered By</th>
+                                            <th>Date</th>
                                             <th>Progress Info</th>
-                                            <th>date</th>
                                             <th>status</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+
+                                    <?php
+
+ 
+$sql="SELECT  * FROM case_log WHERE Case_Id = '$case_id'";
+// echo $sql;
+//echo $sql;
+// if(isset($_GET['toogle']))
+// {
+// if($_GET['toogle']=='1')
+// {
+//     $sql="SELECT  * FROM `evidences` WHERE Case_Id = $case_id AND Officer_Id=$officer_id order by E_No";
+// }
+// }
+
+$result = mysqli_query($conn, $sql);
+
+
+if(mysqli_num_rows($result)>0)
+{
+
+    while($row = mysqli_fetch_assoc($result)) 
+    {
+    //    $anchor="<a href=./suspects.php?case=".$row['case']
+      echo '<tr>';
+      echo '<td>'.$row['Entry_No'].'</td>';
+      echo '<td>'.$row['Officer_Id'].'</td>';
+      echo '<td>'.$row['Date'].'</td>';
+      echo '<td>'.$row['Progress_Info'].'</td>';
+      echo '<td>'.$row['Case_Status'].'</td>';
+    //   echo '<td>'.$row['Date'].'</td>';
+    //   echo '<td>'.$row['Remarks'].'</td>';
+     
+      echo '</tr>';
+     }
+}
+else
+{
+    // echo '<div class="alert alert-warning" role="alert">
+    //                 NO assgined Cases yet!!
+    //               </div>';
+
+    
+}
+mysqli_close($conn);
+        ?>
+                                        <!-- <tr>
                                             <td>2018-09-29 05:57</td>
                                             <td>Mobile</td>
                                             <td>iPhone X 64Gb Grey</td>
@@ -352,7 +435,7 @@
                                             <td>Computer</td>
                                             <td>Macbook Pro Retina 2017</td>
                                             <td>Smartwatch 4.0 LTE Wifi</td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -396,46 +479,33 @@
                                             <h3 class="text-center title-2"></h3>
                                         </div>
                                         <hr>
-                                        <form action="./checkings/officer/add_evidences.php" method="post"
-                                            novalidate="novalidate">
+                                        <form action="./checkings/officer/add_case_history.php" method="post" novalidate="novalidate">
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Case ID</label>
-                                                <input id="cc-pament" name="case-id" type="text" class="form-control"
-                                                    aria-required="true" aria-invalid="false">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="cc-payment" class="control-label mb-1">Officer ID</label>
-                                                <input id="cc-pament" name="suspect-id" type="text" class="form-control"
-                                                    aria-required="true" aria-invalid="false">
+                                                <?php echo '<input id="cc-pament" name="case_id" type="text" class="form-control" aria-required="true" aria-invalid="false" value='.$case_id.'>' ?>                                  
                                             </div>
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Entry NO</label>
-                                                <input id="cc-pament" name="suspect-name" type="text"
-                                                    class="form-control" aria-required="true" aria-invalid="false">
+                                                <input id="cc-pament" name="entry_no" type="text" class="form-control"
+                                                    aria-required="true" aria-invalid="false" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cc-payment" class="control-label mb-1">Description</label>
-                                                <input id="cc-pament" name="address" type="text" class="form-control"
+                                                <label for="cc-payment" class="control-label mb-1">Date</label>
+                                                <input id="cc-pament" name="date" type="text"
+                                                    class="form-control" aria-required="true" required aria-invalid="false" placeholder="yyyy-mm-dd">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Progress Info</label>
+                                                <input id="cc-pament" name="progress" type="text" required class="form-control"
                                                     aria-required="true" aria-invalid="false">
                                             </div>
                                            
                                             <div class="form-group">
-                                                <label for="cc-payment" class="control-label mb-1">strength</label>
-                                                <input id="cc-pament" name="relation" type="text" class="form-control"
+                                                <label for="cc-payment" class="control-label mb-1">status</label>
+                                                <input id="cc-pament" name="status" type="text" required class="form-control"
                                                     aria-required="true" aria-invalid="false">
                                             </div>
-                                            <div class="form-group">
-                                                <label for="cc-payment" class="control-label mb-1">Date</label>
-                                                <input id="cc-pament" name="motive" type="date" class="form-control"
-                                                    aria-required="true" aria-invalid="false">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="cc-payment" class="control-label mb-1">image</label>
-                                                <input id="cc-pament" name="case-id" type="file" class="form-control"
-                                                    aria-required="true" aria-invalid="false">
-                                            </div>
-
+                                            
 
                                     </div>
                                 </div>
@@ -445,7 +515,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                 </div>
                 </form>
             </div>
@@ -483,7 +553,14 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+    <?php
 
+echo "<script>
+document.getElementById('refresh').addEventListener('click',function(e){
+document.location='casehistory.php';
+})
+</script>"
+?>
 </body>
 
 </html>

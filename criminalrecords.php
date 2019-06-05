@@ -1,3 +1,23 @@
+
+
+<?php
+
+session_start();
+if(!isset($_SESSION['officer_id'])&& !isset($_SESSION['case_id']))
+{
+    header('Location: ./officer_dashboard.php');
+    exit();
+}
+$case_id=$_SESSION['case_id'];
+$officer_id=$_SESSION['officer_id'];
+
+require_once('./checkings/dbcon.php');
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,7 +116,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#">
+            <a href="./officer_dashboard.php">
                     <img src="images/icon/logo.png" alt="Cool Admin" />
                 </a>
             </div>
@@ -135,9 +155,9 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <!-- <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
                                 <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
+                                    <i class="zmdi zmdi-search"></i> -->
                                 </button>
                             </form>
                             <div class="header-button">
@@ -259,7 +279,7 @@
                                             <img src="images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#"><?php echo $_SESSION['officer_name']; ?></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -270,14 +290,14 @@
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="#"><?php echo $_SESSION['officer_name']; ?></a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email"><?php echo $_SESSION['officer_id'] ?></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
+                                                    <!-- <a href="#">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
@@ -288,9 +308,9 @@
                                                     <a href="#">
                                                         <i class="zmdi zmdi-money-box"></i>Billing</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
+                                            <a href="./checkings/logout.php">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
@@ -310,7 +330,7 @@
 
 
 
-                            <div class="row" ">
+                            <!-- <div class="row">
                                     <div class="col">
                                       <section class="card" style="background: none;border: 0px;">
                                         <div class="card-body text-secondary">
@@ -330,7 +350,7 @@
                                         <div class="card-body text-secondary"><button type="button" class="btn btn-danger btn-lg btn-block">Remove Entry</button></div></div>
                                       </section>
                                     </div>
-                                  </div>
+                                  </div> -->
 
 
 
@@ -342,15 +362,62 @@
                                             <table class="table table-borderless table-data3">
                                                 <thead>
                                                     <tr>
-                                                        <th>date</th>
-                                                        <th>type</th>
-                                                        <th>description</th>
-                                                        <th>status</th>
-                                                        <th>price</th>
+                                                        <th>ID</th>
+                                                        <th>Name</th>
+                                                        <th>Sex</th>
+                                                        <th>History</th>
+                                                        <th>About</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+
+
+
+
+                                                                    <?php
+
+                    $sql="SELECT  * FROM criminal_records WHERE 1";
+                    // echo $sql;
+                    //echo $sql;
+                    // if(isset($_GET['toogle']))
+                    // {
+                    // if($_GET['toogle']=='1')
+                    // {
+                    //     $sql="SELECT  * FROM `evidences` WHERE Case_Id = $case_id AND Officer_Id=$officer_id order by E_No";
+                    // }
+                    // }
+
+                    $result = mysqli_query($conn, $sql);
+
+
+                    if(mysqli_num_rows($result)>0)
+                    {
+
+                        while($row = mysqli_fetch_assoc($result)) 
+                        {
+                        //    $anchor="<a href=./suspects.php?case=".$row['case']
+                        echo '<tr>';
+                        echo '<td>'.$row['C_Id'].'</td>';
+                        echo '<td>'.$row['C_Name'].'</td>';
+                        echo '<td>'.$row['sex'].'</td>';
+                        echo '<td>'.$row['Criminal_History'].'</td>';
+                        echo '<td>'.$row['Whereabout'].'</td>';
+                        //   echo '<td>'.$row['Remarks'].'</td>';
+                        
+                        echo '</tr>';
+                        }
+                    }
+                    else
+                    {
+                        // echo '<div class="alert alert-warning" role="alert">
+                        //                 NO assgined Cases yet!!
+                        //               </div>';
+
+                        
+                    }
+                    mysqli_close($conn);
+                            ?>
+                                                    <!-- <tr>
                                                         <td>2018-09-29 05:57</td>
                                                         <td>Mobile</td>
                                                         <td>iPhone X 64Gb Grey</td>
@@ -405,7 +472,7 @@
                                                         <td>Macbook Pro Retina 2017</td>
                                                         <td class="process">Processed</td>
                                                         <td>$10.00</td>
-                                                    </tr>
+                                                    </tr> -->
                                                 </tbody>
                                             </table>
                                         </div>
